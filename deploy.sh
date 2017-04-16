@@ -1,12 +1,11 @@
 #!/bin/bash
-docker build -t kostyaurysov/sample-node .
-docker push kostyaurysov/sample-node
+docker push litleleprikon/sample-node
 
-ssh deploy@35.187.30.81 << EOF
-docker pull kostyaurysov/sample-node:latest
+ssh litleleprikon@104.199.109.216 << EOF
+docker pull litleleprikon/sample-node:latest
 docker stop web || true
 docker rm web || true
-docker rmi kostyaurysov/sample-node:current || true
-docker tag kostyaurysov/sample-node:latest kostyaurysov/sample-node:current
-docker run -d --net app --restart always --name web -p 80:80 kostyaurysov/sample-node:current
+docker rmi litleleprikon/sample-node:current || true
+docker tag litleleprikon/sample-node:latest litleleprikon/sample-node:current
+docker run -d --net app --restart always --name web -p 80:80 litleleprikon/sample-node:current
 EOF
